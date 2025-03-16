@@ -24,11 +24,11 @@ export default function LoginForm() {
 
   return (
     <div className="w-md mx-auto p-6 bg-white shadow-md rounded-lg">
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <p className="text-red-500 pb-2">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <Label className="pb-2" htmlFor="email">
-            Email
+            Username
           </Label>
           <Input
             type="text"

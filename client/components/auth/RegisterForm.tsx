@@ -6,6 +6,8 @@ import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 
+import axios from 'axios';
+
 export default function RegisterForm() {
   const [form, setForm] = useState({
     username: '',
@@ -38,16 +40,12 @@ export default function RegisterForm() {
     }
 
     try {
-      const res = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          username: form.username,
-          password: form.password,
-        }),
+      const res = await axios.post('http://localhost:5000/api/auth/register', {
+        username: form.username,
+        password: form.password,
       });
 
-      if (!res.ok) throw new Error('Registration failed');
+      if (!res.data) throw new Error('Registration failed');
 
       router.push('/dashboard');
     } catch (err) {
