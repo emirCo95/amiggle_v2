@@ -3,12 +3,12 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 
 interface User {
-  username: string;
+  email: string;
 }
 
 interface AuthContextType {
   user: User | null;
-  login: (username: string, password: string) => Promise<void>;
+  login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -24,10 +24,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       .catch(() => setUser(null));
   }, []);
 
-  const login = async (username: string, password: string) => {
+  const login = async (email: string, password: string) => {
     await axios.post(
       'http://localhost:5000/api/auth/login',
-      { username, password },
+      { email, password },
       { withCredentials: true }
     );
     const res = await axios.get('http://localhost:5000/api/auth/me', {

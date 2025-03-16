@@ -8,14 +8,14 @@ import Link from 'next/link';
 
 export default function LoginForm() {
   const { login } = useAuth();
-  const [username, setUsername] = useState('');
+  const [email, setemail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await login(username, password);
+      await login(email, password);
     } catch (err) {
       console.log(err);
       setError('Invalid credentials');
@@ -28,14 +28,14 @@ export default function LoginForm() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <Label className="pb-2" htmlFor="email">
-            Username
+            Email
           </Label>
           <Input
             type="text"
-            name="username"
-            id="username"
+            name="email"
+            id="email"
             required
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => setemail(e.target.value)}
           />
         </div>
         <div>

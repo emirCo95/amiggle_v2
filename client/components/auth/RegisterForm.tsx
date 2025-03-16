@@ -1,6 +1,5 @@
 'use client';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -10,13 +9,12 @@ import axios from 'axios';
 
 export default function RegisterForm() {
   const [form, setForm] = useState({
-    username: '',
+    email: '',
     password: '',
     confirmPassword: '',
     termsAccepted: false,
   });
   const [error, setError] = useState('');
-  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -41,13 +39,13 @@ export default function RegisterForm() {
 
     try {
       const res = await axios.post('http://localhost:5000/api/auth/register', {
-        username: form.username,
+        email: form.email,
         password: form.password,
       });
 
       if (!res.data) throw new Error('Registration failed');
 
-      router.push('/dashboard');
+      alert('Check your email for a verification link!');
     } catch (err) {
       console.log(err);
       setError('Registration failed. Please try again.');
@@ -59,13 +57,13 @@ export default function RegisterForm() {
       {error && <p className="text-red-500 pb-2">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <Label className="pb-2" htmlFor="username">
-            Username
+          <Label className="pb-2" htmlFor="email">
+            Email
           </Label>
           <Input
-            type="username"
-            name="username"
-            id="username"
+            type="email"
+            name="email"
+            id="email"
             required
             onChange={handleChange}
           />
