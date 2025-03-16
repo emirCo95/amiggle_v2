@@ -21,7 +21,7 @@ app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(cookieParser());
 app.use(
   session({
-    secret: 'your_secret_key', // Change this to a strong, secure key
+    secret: process.env.SESSION_SECRET, // Change this to a strong, secure key
     resave: false,
     saveUninitialized: false,
     cookie: {
