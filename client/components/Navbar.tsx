@@ -14,13 +14,14 @@ import LogoutButton from './auth/LogoutButton';
 
 import logo from '@/public/logo.png';
 import Image from 'next/image';
+import { ModeToggle } from './ModeToggle';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="bg-white shadow-md p-4">
+    <nav className=" p-4">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="text-xl font-bold">
@@ -33,8 +34,8 @@ export default function Navbar() {
             Home
           </Link>
           {user && (
-            <Link href="/dashboard" className="hover:text-gray-600">
-              Dashboard
+            <Link href="/profile" className="hover:text-gray-600">
+              Profile
             </Link>
           )}
         </div>
@@ -42,7 +43,10 @@ export default function Navbar() {
         {/* Authentication Buttons */}
         <div className="hidden md:flex space-x-4">
           {user ? (
-            <LogoutButton />
+            <>
+              <ModeToggle />
+              <LogoutButton />
+            </>
           ) : (
             <>
               <Link href="/login">
@@ -70,11 +74,11 @@ export default function Navbar() {
               </Link>
               {user && (
                 <Link
-                  href="/dashboard"
+                  href="/profile"
                   className="text-lg"
                   onClick={() => setOpen(false)}
                 >
-                  Dashboard
+                  Profile
                 </Link>
               )}
               <div className="mt-4">

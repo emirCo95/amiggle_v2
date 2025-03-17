@@ -4,6 +4,7 @@ import axios from 'axios';
 
 interface User {
   email: string;
+  username: string;
 }
 
 interface AuthContextType {
@@ -25,6 +26,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const login = async (email: string, password: string) => {
+    console.log(email, password);
     await axios.post(
       'http://localhost:5000/api/auth/login',
       { email, password },

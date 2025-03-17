@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -15,6 +16,8 @@ export default function RegisterForm() {
     termsAccepted: false,
   });
   const [error, setError] = useState('');
+
+  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -45,7 +48,8 @@ export default function RegisterForm() {
 
       if (!res.data) throw new Error('Registration failed');
 
-      alert('Check your email for a verification link!');
+      alert('Please login to continue!');
+      router.push('/login');
     } catch (err) {
       console.log(err);
       setError('Registration failed. Please try again.');

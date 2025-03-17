@@ -21,24 +21,23 @@ router.post('/register', async (req, res) => {
 
     const username = generateUsername('', 3);
 
-    const token = crypto.randomBytes(32).toString('hex');
+    // const token = crypto.randomBytes(32).toString('hex');
 
-    console.log(token);
     const newUser = new User({
       email,
       password: hashedPassword,
       username,
-      verificationToken: token,
+      // verificationToken: token,
     });
 
     await newUser.save();
 
-    try {
-      // Send verification email
-      await sendVerificationEmail(email, token);
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   // Send verification email
+    //   await sendVerificationEmail(email, token);
+    // } catch (error) {
+    //   console.log(error);
+    // }
 
     res.status(201).json({ message: 'User registered successfully' });
   } catch (err) {

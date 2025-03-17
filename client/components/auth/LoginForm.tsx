@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,14 +9,18 @@ import Link from 'next/link';
 
 export default function LoginForm() {
   const { login } = useAuth();
-  const [email, setemail] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      console.log(email, password);
       await login(email, password);
+      router.push('/');
     } catch (err) {
       console.log(err);
       setError('Invalid credentials');
@@ -31,11 +36,11 @@ export default function LoginForm() {
             Email
           </Label>
           <Input
-            type="text"
+            type="email"
             name="email"
             id="email"
             required
-            onChange={(e) => setemail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div>
