@@ -10,6 +10,7 @@ import './config/passportConfig.js';
 
 //ROUTES IMPORT
 import authRoutes from './routes/authRoutes.js';
+import listingRoutes from './routes/listingRoutes.js';
 
 dotenv.config();
 
@@ -52,6 +53,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', authRoutes);
+app.use('/api/listings', listingRoutes);
 
 // Start Server
 const PORT = process.env.PORT || 5000;
